@@ -22,6 +22,7 @@ from django.contrib.auth import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('analysis.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
     path('auth/',include('auth.urls')),
     
 ]

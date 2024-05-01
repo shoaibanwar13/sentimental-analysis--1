@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 import requests
-from .models import User_Result
+from .models import User_Result,Plans 
 from django.contrib.auth.decorators import login_required
 API_URL = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest" #API URL 
 headers = {"Authorization": "Bearer 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"} #Authentication Token of your account
@@ -9,10 +9,14 @@ def query(payload):
     #this fun use for sending request to api and get response mean result
 	response = requests.post(API_URL, headers=headers, json=payload)
      #data return 
-	return response.json() 
-  
+	return response.json()  
+def contactus(request):
+     user_data=User_Result.objects.filter(user=request.user)
+     return render(request,'contact.html',{'user_data':user_data})
 def index(request):
-    return render(request,'index.html')
+    plan=Plans.objects.all()
+    print(plan)
+    return render(request,'index.html',{'plan':plan})
 def user_result(request):
     return render(request,'user_result.html')
 @login_required
@@ -63,4 +67,10 @@ def user_history(request):
       # get all results of user from database 
         user_data=User_Result.objects.filter(user=request.user)
         return render(request,'history.html',{'user_data':user_data})
+def plan_detail(request,id):
+     plan_detail=get_object_or_404(Plans,id=id) 
+     print(plan_detail)
+     return render(request,'plan_detail.html',{'plan_detail':plan_detail})
+
+
   

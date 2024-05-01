@@ -39,7 +39,7 @@
                   <div class="navbar-container">
                      <a href="/" aria-current="page" class="navbar-logo-link w-nav-brand w--current"><img src="https://assets-global.website-files.com/65e5b8e7e13f2e507c87090d/65ef099e91d643a2485fa9b5_Logo.png" loading="lazy" width="97" alt="Logo" class="logo-image"/></a>
                      <nav role="navigation" class="navbar-menu w-nav-menu">
-                        <div class="navbar-menu-left"><a href="/" aria-current="page" class="navbar-link w-nav-link w--current">Home</a><a href="{% url 'sentimental_analysis' %}" class="navbar-link w-nav-link">Sentimental Analysis</a><a href="#Pricing" class="navbar-link w-nav-link">Pricing</a><a href="#Faq" class="navbar-link w-nav-link">Faq</a><a href="/contact" class="navbar-link w-nav-link">Contact</a></div>
+                        <div class="navbar-menu-left"><a href="/" aria-current="page" class="navbar-link w-nav-link w--current">Home</a><a href="{% url 'sentimental_analysis' %}" class="navbar-link w-nav-link">Sentimental Analysis</a><a href="#Pricing" class="navbar-link w-nav-link">Pricing</a><a href="#Faq" class="navbar-link w-nav-link">Faq</a><a href="{% url 'contactus'%}" class="navbar-link w-nav-link">Contact</a></div>
                         <div class="navbar-menu-right"><a href="/log-in" class="button is-small w-button">Get Started</a></div>
                      </nav>
                      <div class="navbar-menu-button w-nav-button">
@@ -392,19 +392,25 @@
                            </div>
                            <div class="w-tab-content">
                               <div data-w-tab="Tab 1" class="pricing-tab-pane w-tab-pane w--tab-active">
+                                 
                                  <div class="w-layout-grid pricing-plans">
+                                    {% for plan in plan %} 
                                     <div data-w-id="7c3321fb-6814-2338-bd93-b46d644a24da" style="opacity:0;-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="pricing-plan">
                                        <div class="pricing-circle"></div>
+                                       
+                                      
+                                       
+                                       
                                        <div class="pricing-content">
                                           <div class="margin-bottom margin-tiny">
-                                             <div class="heading-style-h6">Basic plan</div>
+                                             <div class="heading-style-h6">{{plan.name}}</div>
                                           </div>
-                                          <div>Lorem ipsum dolor sit amet</div>
+                                          <div>{{plan.plan_description}}</div>
                                           <div class="pricing-divider"></div>
                                           <div class="margin-vertical margin-xxsmall">
-                                             <div class="heading-style-h1">$19/mo</div>
+                                             <div class="heading-style-h1">${{plan.plan_pricing}}</div>
                                           </div>
-                                          <div class="margin-top margin-medium"><a href="/sign-up" class="button max-width-full w-button">Get started</a></div>
+                                          <div class="margin-top margin-medium">Save {{plan.discount}}<a href="{% url 'plan_detail' plan.id %}" class="button max-width-full w-button">Purchase Now</a></div>
                                           <div class="pricing-divider"></div>
                                           <div class="pricing-feature-list">
                                              <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a24ea-7c87090c" class="pricing-feature">
@@ -415,7 +421,7 @@
                                                       </svg>
                                                    </div>
                                                 </div>
-                                                <div>Automatic updates<br/></div>
+                                                <div>{{plan.benefit1}}<br/></div>
                                              </div>
                                              <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a24f0-7c87090c" class="pricing-feature">
                                                 <div class="pricing-feature-icon-wrapper">
@@ -425,7 +431,7 @@
                                                       </svg>
                                                    </div>
                                                 </div>
-                                                <div>Support Assistance</div>
+                                                <div>{{plan.benefit2}}</div>
                                              </div>
                                              <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a24f5-7c87090c" class="pricing-feature">
                                                 <div class="pricing-feature-icon-wrapper">
@@ -435,148 +441,25 @@
                                                       </svg>
                                                    </div>
                                                 </div>
-                                                <div>Customization</div>
+                                                <div>{{plan.benefit3}}</div>
+                                             </div>
+                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a24f5-7c87090c" class="pricing-feature">
+                                                <div class="pricing-feature-icon-wrapper">
+                                                   <div class="icon-embed-xsmall w-embed">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
+                                                      </svg>
+                                                   </div>
+                                                </div>
+                                                <div>{{plan.benefit4}}</div>
                                              </div>
                                           </div>
                                        </div>
+                                     
                                     </div>
-                                    <div data-w-id="7c3321fb-6814-2338-bd93-b46d644a24fa" style="opacity:0;-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="pricing-center-block">
-                                       <div class="pricing-plan">
-                                          <div class="pricing-circle second"></div>
-                                          <div class="pricing-content">
-                                             <div class="margin-bottom margin-tiny">
-                                                <div class="heading-style-h6">Business plan</div>
-                                             </div>
-                                             <div>Lorem ipsum dolor sit amet</div>
-                                             <div class="pricing-divider"></div>
-                                             <div class="margin-vertical margin-xxsmall">
-                                                <div class="heading-style-h1">$29/mo</div>
-                                             </div>
-                                             <div class="margin-top margin-medium"><a href="/sign-up" class="button max-width-full w-button">Get started</a></div>
-                                             <div class="pricing-divider"></div>
-                                             <div class="pricing-feature-list">
-                                                <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a250b-7c87090c" class="pricing-feature">
-                                                   <div class="pricing-feature-icon-wrapper">
-                                                      <div class="icon-embed-xsmall w-embed">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                            <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                         </svg>
-                                                      </div>
-                                                   </div>
-                                                   <div>Automatic updates</div>
-                                                </div>
-                                                <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2510-7c87090c" class="pricing-feature">
-                                                   <div class="pricing-feature-icon-wrapper">
-                                                      <div class="icon-embed-xsmall w-embed">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                            <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                         </svg>
-                                                      </div>
-                                                   </div>
-                                                   <div>Support Assistance</div>
-                                                </div>
-                                                <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2515-7c87090c" class="pricing-feature">
-                                                   <div class="pricing-feature-icon-wrapper">
-                                                      <div class="icon-embed-xsmall w-embed">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                            <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                         </svg>
-                                                      </div>
-                                                   </div>
-                                                   <div>Customization</div>
-                                                </div>
-                                                <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a251a-7c87090c" class="pricing-feature">
-                                                   <div class="pricing-feature-icon-wrapper">
-                                                      <div class="icon-embed-xsmall w-embed">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                            <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                         </svg>
-                                                      </div>
-                                                   </div>
-                                                   <div>Language Support</div>
-                                                </div>
-                                                <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a251f-7c87090c" class="pricing-feature">
-                                                   <div class="pricing-feature-icon-wrapper">
-                                                      <div class="icon-embed-xsmall w-embed">
-                                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                            <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                         </svg>
-                                                      </div>
-                                                   </div>
-                                                   <div>Collaboration</div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-w-id="7c3321fb-6814-2338-bd93-b46d644a2524" style="opacity:0;-webkit-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="pricing-plan">
-                                       <div class="pricing-circle third"></div>
-                                       <div class="pricing-content">
-                                          <div class="margin-bottom margin-tiny">
-                                             <div class="heading-style-h6">Enterprise plan</div>
-                                          </div>
-                                          <div>Lorem ipsum dolor sit amet</div>
-                                          <div class="pricing-divider"></div>
-                                          <div class="margin-vertical margin-xxsmall">
-                                             <div class="heading-style-h1">$49/mo</div>
-                                          </div>
-                                          <div class="margin-top margin-medium"><a href="/sign-up" class="button max-width-full w-button">Get started</a></div>
-                                          <div class="pricing-divider"></div>
-                                          <div class="pricing-feature-list">
-                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2534-7c87090c" class="pricing-feature">
-                                                <div class="pricing-feature-icon-wrapper">
-                                                   <div class="icon-embed-xsmall w-embed">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                                <div>Automatic updates</div>
-                                             </div>
-                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2539-7c87090c" class="pricing-feature">
-                                                <div class="pricing-feature-icon-wrapper">
-                                                   <div class="icon-embed-xsmall w-embed">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                                <div>Support Assistance</div>
-                                             </div>
-                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a253e-7c87090c" class="pricing-feature">
-                                                <div class="pricing-feature-icon-wrapper">
-                                                   <div class="icon-embed-xsmall w-embed">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                                <div>Customization</div>
-                                             </div>
-                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2543-7c87090c" class="pricing-feature">
-                                                <div class="pricing-feature-icon-wrapper">
-                                                   <div class="icon-embed-xsmall w-embed">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                                <div>Language Support</div>
-                                             </div>
-                                             <div id="w-node-_7c3321fb-6814-2338-bd93-b46d644a2548-7c87090c" class="pricing-feature">
-                                                <div class="pricing-feature-icon-wrapper">
-                                                   <div class="icon-embed-xsmall w-embed">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-                                                         <path d="M20.3479 7.56384L9.7479 18.1638C9.65402 18.2585 9.52622 18.3117 9.3929 18.3117C9.25958 18.3117 9.13178 18.2585 9.0379 18.1638L3.6479 12.7738C3.55324 12.68 3.5 12.5522 3.5 12.4188C3.5 12.2855 3.55324 12.1577 3.6479 12.0638L4.3479 11.3638C4.44178 11.2692 4.56958 11.2159 4.7029 11.2159C4.83622 11.2159 4.96402 11.2692 5.0579 11.3638L9.3879 15.6938L18.9379 6.14384C19.1357 5.95205 19.4501 5.95205 19.6479 6.14384L20.3479 6.85384C20.4426 6.94772 20.4958 7.07552 20.4958 7.20884C20.4958 7.34216 20.4426 7.46995 20.3479 7.56384Z" fill="currentColor"/>
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                                <div>Collaboration</div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
+                                    {% endfor %}       
                                  </div>
+                                
                               </div>
                               <div data-w-tab="Tab 2" class="pricing-tab-pane w-tab-pane">
                                  <div class="w-layout-grid pricing-plans">

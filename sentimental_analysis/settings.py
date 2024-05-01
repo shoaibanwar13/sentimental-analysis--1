@@ -24,27 +24,66 @@ SECRET_KEY = 'django-insecure-mj($mej^3alj&ojdbpq$te4yac1-**cb=8^wxld0r3&elp_d5o
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#sentimentalanalysis-uhvm.onrender.com
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sentimentalanalysis-uhvm.onrender.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'analysis',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'django_htmx',
     'crispy_forms',
     'crispy_bootstrap5',
+     
 ]
+AUTHENTICATION_BACKENDS = (
+     
+     
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+     
+    'social_core.backends.google.GoogleOAuth2',
+)
+#clientid=226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com
+#SECRET_KEY=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
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
 #Model for using bootstrape in djago forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Sentimental Analysis ",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Sentimental Analysis",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Sentimental Analysis",
+
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    
+    
+
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    "login_logo_dark":True,
+}
+JAZZMIN_SETTINGS["show_ui_builder"] = True
+JAZZMIN_UI_TWEAKS = {
+    
+    "theme": "darkly",
+}
 #Redirection after login,signup and lagout
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
@@ -150,6 +189,6 @@ EMAIL_USE_TLS = True
 #smtp port no 
 EMAIL_PORT = 587
 #email host user
-EMAIL_HOST_USER = 'shoaib4311859@gmail.com'
+EMAIL_HOST_USER = 'uroojaisha18@gmail.com'  
 #email host password (create app in gmail to send email throught those email acount)
-EMAIL_HOST_PASSWORD = 'wofegltuqmpfafkl'
+EMAIL_HOST_PASSWORD = 'sfcv bhfb iqib benh'

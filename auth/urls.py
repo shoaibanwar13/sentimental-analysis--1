@@ -1,11 +1,14 @@
  
 from django.urls import path
-from auth.views import signup,logoutfunction
+from auth.views import *
 from django.contrib.auth import views
  
 urlpatterns = [
     #Authentication mean singn up,login and logout
     path('signup/', signup,name='signup'),
+    path('activate/<uidb64>/<token>',ActtivateAccountView.as_view(),name="activate"),
+    path('emailconfirm',emailconfirm,name='emailconfirm'),
+    path('activate_fail',activate_fail,name='activate_fail'),
     path('login/', views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/',  logoutfunction, name='logout'),
     #Password recovery :we use django builtin password recovery system

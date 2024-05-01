@@ -7,4 +7,6 @@ urlpatterns = [
     path('user_result',user_result,name='user_result'),
     path('sentimental_analysis',sentimental_analysis,name='sentimental_analysis'),
     path('user_history',user_history,name='user_history'),
+    path('contactus',contactus,name='contactus'),
+    path('plan_detail/<str:id>',plan_detail,name='plan_detail'),
 ]
