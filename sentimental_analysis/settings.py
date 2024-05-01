@@ -56,8 +56,8 @@ AUTHENTICATION_BACKENDS = (
 )
 #clientid=226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com
 #SECRET_KEY=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
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 #Model for using bootstrape in djago forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
