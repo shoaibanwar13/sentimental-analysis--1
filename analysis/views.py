@@ -45,7 +45,7 @@ def sendemail():
             start_scheduler(email,user,plan_name)
 #calling sending mail function
 
-sendemail() 
+
  #API URL 
 API_URL = "https://api-inference.huggingface.co/models/Remicm/sentiment-analysis-model-for-socialmedia"
 
