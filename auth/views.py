@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import login, logout
-from .forms import SignUpForm
+
+from .forms import SignUpForm,UserUpdateForm,ProfileUpdateForm
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes,force_str
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from .utlis import generate_token
+from django.core.mail import EmailMessage
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.views.generic import View
@@ -28,10 +29,35 @@ def signup(request):
         })
             email_message = EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[request.POST.get('email')])
             email_message.send()
-        return redirect('/')
+            return redirect('emailverification')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+       
+def emailverification(request):
+    return render(request, 'verification.html')
+
+def profile_edit(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('/')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'profile_edit.html',context)
  #class base view   
 class ActtivateAccountView(View):
      def get(self,request,uidb64,token):
@@ -53,7 +79,11 @@ def emailconfirm(request):
 def activate_fail(request):
     return render(request,'activatefail.html')
    
-def logoutfunction(request):
-    logout(request)
-    return redirect('/')
 
+
+def User_profile(request):
+    if request.htmx:
+        return render(request,'components/User_profile.html')
+    else:
+        return render(request,'User_profile.html')
+    

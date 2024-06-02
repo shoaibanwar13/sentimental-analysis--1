@@ -2,15 +2,18 @@
 from django.urls import path
 from auth.views import *
 from django.contrib.auth import views
+
  
 urlpatterns = [
     #Authentication mean singn up,login and logout
     path('signup/', signup,name='signup'),
     path('activate/<uidb64>/<token>',ActtivateAccountView.as_view(),name="activate"),
-    path('emailconfirm',emailconfirm,name='emailconfirm'),
-    path('activate_fail',activate_fail,name='activate_fail'),
-    path('login/', views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/',  logoutfunction, name='logout'),
+    path('emailconfirm/',emailconfirm,name='emailconfirm'),
+    path('activate_fail/',activate_fail,name='activate_fail'),
+    path('profile_edit/',profile_edit,name='profile_edit'),
+    path('User_profile/',User_profile,name='User_profile'),
+    path('emailverification/',emailverification,name="emailverification"),
+    
     #Password recovery :we use django builtin password recovery system
     #this func url render the pg that contain email field to send email 
     path("password_reset/", views.PasswordResetView.as_view(template_name='reset_password.html'), name="password_reset"),

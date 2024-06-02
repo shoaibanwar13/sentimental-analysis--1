@@ -1,11 +1,10 @@
 
-
   <!DOCTYPE html>
 <!-- This site was created in Webflow. https://www.webflow.com -->
 <!-- Last Published: Wed Aug 10 2022 12:15:30 GMT+0000 (Coordinated Universal Time) -->
 <html data-wf-domain="softbit-template.webflow.io" data-wf-page="5f0defb9fce45c4364213cff" data-wf-site="5f0763bf575ff70f2f96ccaa">
   <head>
-    <meta charset="utf-8" /><title>Coming Soon</title><meta content="Coming Soon" property="og:title" />
+    <meta charset="utf-8" /><title>Analysis</title><meta content="Coming Soon" property="og:title" />
     <meta content="Coming Soon" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Webflow" name="generator" />
@@ -21,6 +20,28 @@
           t = ' w-mod-'
         ;(n.className += t + 'js'), ('ontouchstart' in o || (o.DocumentTouch && c instanceof DocumentTouch)) && (n.className += t + 'touch')
       })(window, document)
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          [' Results', 'Sentiment Results'],
+          ['Positive',    {{positive_score|floatformat:2}}],
+          ['Negative',     {{negative_score|floatformat:2}}],
+          
+           
+        ]);
+
+        var options = {
+          title: 'Sentiment  Results',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
     </script>
     
     <style>
@@ -40,40 +61,34 @@
       }
       
   </style>
-    <link href="https://assets.website-files.com/5f0763bf575ff70f2f96ccaa/5f0f8ffcb70ac1103c568cfe_favicon-32x32.png" rel="shortcut icon" type="image/x-icon" />
-    <link href="https://assets.website-files.com/5f0763bf575ff70f2f96ccaa/5f0f900337344f59f8812b1b_android-chrome-256x256.png" rel="apple-touch-icon" />
-  </head>
+      </head>
   <body class="coming-soon-bg" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' >
     <img id="indicator" class="htmx-indicator" src="https://codemyui.com/wp-content/uploads/2017/09/rotate-pulsating-loading-animation.gif" >
     <div class="utility-page-wrapper">
       <div class="utility-page-wrapper-content with-card">
         <img id="indicator" class="htmx-indicator" src="https://codemyui.com/wp-content/uploads/2017/09/rotate-pulsating-loading-animation.gif" >
-        <img src="https://assets.website-files.com/5f0763bf575ff70f2f96ccaa/5f078598f0a4fd865d7c9833_SoftBit%20-%20Light%20v2.svg" alt="" class="utility-logo" /><div class="coming-soon-page-content">
-          <h1 class="coming-soon-title">Hold tight, we are launching soon</h1><p class="form-helper-text">Subscribe to our newsletter to get notified about the latest news. We will send an email as soon as our site goes live.</p>
+        <img src="https://i.pinimg.com/736x/06/e4/22/06e422b0319a58430198f1156580b7ed.jpg" style="border-radius: 110px;" alt="" class="utility-logo" /><div class="coming-soon-page-content">
+          <h1 class="coming-soon-title">Analyze sentiment of your text</h1><p class="form-helper-text">Welcome to our sentiment analysis tool! Enter your text below to gain valuable insights into sentiment and emotions.</p>
           <div class="hero-email-form w-form">
-            <form   class="inline-form flex-vertical-mobile" action="{% url 'sentimental_analysis' %}" method="get"> 
+            <form   class="inline-form flex-vertical-mobile" action="{% url 'sentimental_analysis' %}" method="post"> 
               {% csrf_token %}
-              <input type="text" class="text-field big w-input" maxlength="256" name="text" data-name="Demo Sign Up Email" placeholder="Enter your email" id="Demo-Sign-Up-Email" required="" value="{{input_text}}" />
+              <input type="text" class="text-field big w-input" maxlength="256" name="text" data-name="Demo Sign Up Email" placeholder="Enter your text" id="Demo-Sign-Up-Email" required="" value="{{input_text}}" />
               <button    class="submit-btn no-margin-top full-width-mobile w-button" >Submit</button>
             </form>
+            {% if positive_score %}
+
+            
             
             <div>
-                <div>Positive:{{positive_score}}</div>
-              </div>
-              <div  >
-                <div>Negative:{{negative_score}}</div>
-              </div>
-              <div  >
-                <div>Neutal:{{neutral_score}}</div>
-              </div>
-              <div class="w-form-done">
-                <div>{{result}}</div>
-              </div>
-              <a href="{% url 'user_history' %}" class="submit-btn no-margin-top full-width-mobile w-button" >See your final result</a>
-             
+              <div id="piechart_3d" style="width: 400px; height: 200px;margin-top:15px; background-color: black;"></div><br>
+                 
+              <a href="{% url 'user_history' %}" class="submit-btn no-margin-top full-width-mobile w-button" style="margin-left: 80px;" >See your final result</a>
+              {% endif %}
+
               
               
-             
+              </div>
+              </div>
           </div>
         </div>
       </div>
@@ -87,3 +102,6 @@
     <!-- [if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   </body>
 </html>
+
+    
+   

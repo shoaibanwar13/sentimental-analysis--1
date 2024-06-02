@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS={
+    messages.ERROR:'danger'
+}
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +31,7 @@ SECRET_KEY = 'django-insecure-mj($mej^3alj&ojdbpq$te4yac1-**cb=8^wxld0r3&elp_d5o
 DEBUG = True
 #sentimentalanalysis-uhvm.onrender.com
 
-ALLOWED_HOSTS = ['sentimentalanalysis-uhvm.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -44,6 +49,9 @@ INSTALLED_APPS = [
     'django_htmx',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_bootstrap5',
+    'cloudinary',
+    'cloudinary_storage',
      
 ]
 AUTHENTICATION_BACKENDS = (
@@ -58,6 +66,9 @@ AUTHENTICATION_BACKENDS = (
 #SECRET_KEY=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
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '226155709649-1r98bp102u5dl4okpb02fr0sfsblpjph.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+STRIPE_PUBLIC_KEY  = 'pk_test_51NaWhJJQmh7tshf7UBjp671cyquBm44eQwmq9viZu0MEWyxK3f0HDLrTi6RT3LS5E5vjF8kPgNCzmtzmdY2cSFLn00MVfxIY9r'
+STRIPE_SECRET_KEY = 'sk_test_51NaWhJJQmh7tshf7PIGDbhCSEKypRH8l8P3mxMKcMde3zGtlQZEXyY8M1D74Unj7JyfmuBXfUPqMliSNvaBUJN1e00f2a8011D'
 
 #Model for using bootstrape in djago forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -174,6 +185,17 @@ STATICFILES_DIRS=[
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+#Cloudinery Storage config:
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dgg7jcb2d',
+    'API_KEY': '938381448263559',
+    'API_SECRET': 'Qa1qGGhQZieCWLghw_PgBIRfK-4'
+}
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

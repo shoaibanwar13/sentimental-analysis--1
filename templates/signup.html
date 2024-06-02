@@ -26,23 +26,25 @@
   <body>
     <div class="utility-page-wrapper">
       <div class="utility-page-wrapper-content with-card">
-        {% if form.errors %}
-        {% for field in form %}
-        {% for error in field.errors %}
-        <div style="background-color: rgb(37, 35, 35); border-radius: 25 px; padding: 4px;">
-          <p style="color: white;">{{ error|escape }}</p>
-        </div>
-        {% endfor %}
-        {% endfor %}
-
-        {% for error in form.non_field_errors %}
-        <div style="background-color: rgb(37, 35, 35); border-radius: 25 px; padding: 4px;">
-          <p style="color: white;">{{ error|escape }}</p>
-        </div>
-        {% endfor %}
-        {% endif %}
-        <a href="/" class="utility-logo w-inline-block"><img src="https://assets.website-files.com/5f0763bf575ff70f2f96ccaa/5f078598f0a4fd865d7c9833_SoftBit%20-%20Light%20v2.svg" alt="" class="utility-logo" /></a><div class="utility-page-form card max-width">
+       
+        
+        <a href="/" class="utility-logo w-inline-block"><img src="https://i.pinimg.com/736x/06/e4/22/06e422b0319a58430198f1156580b7ed.jpg" style="border-radius: 110px;" alt="" class="utility-logo" /></a><div class="utility-page-form card max-width">
           <h1 class="utility-card-title">Sign Up</h1><div class="w-form">
+            {% if form.errors %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div style="background-color: rgb(37, 35, 35); border-radius: 25 px; padding: 4px;">
+              <p style="color: red;">{{ error|escape }}</p>
+            </div>
+            {% endfor %}
+            {% endfor %}
+      
+            {% for error in form.non_field_errors %}
+            <div style="background-color: rgb(37, 35, 35); border-radius: 25 px; padding: 4px;">
+              <p style="color: red;">{{ error|escape }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
             <form id="wf-form-sign-up-form" name="wf-form-sign-up-form" data-name="sign up form" method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
                 <div class="text-field-flex-wrap">
@@ -55,7 +57,7 @@
                 </div>
               </div>
               <div class="text-field-wrap small-margin-bottom">
-                <label for="password-input-field" class="field-label">Username</label><input type="text" class="text-field w-input" maxlength="256" name="username" data-name="Login Email" placeholder="Enter your email address" id="login-email" required="" />
+                <label for="password-input-field" class="field-label">Username</label><input type="text" class="text-field w-input" maxlength="256" name="username" data-name="Login Email" placeholder="Enter your username" id="login-email" required="" />
               </div>
               <div class="text-field-wrap small-margin-bottom">
                 <label for="password-input-field" class="field-label">Email</label><input type="email" class="text-field w-input" maxlength="256" name="email" data-name="Login Email" placeholder="Enter your email address" id="login-email" required="" />
@@ -72,7 +74,7 @@
                   <input type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" style="opacity:0;position:absolute;z-index:-1" /><span class="w-form-label" for="checkbox">I agree with the <a href="/legal" target="_blank" class="terms-agree-link">Terms &amp; Conditions</a></span>
                 </label>
               </div>
-              <input type="submit" value="Sign Up" data-wait="Please wait..." class="filled-btn full-width w-button" />
+              <input type="submit" value="Sign Up" data-wait="Please wait..." class="filled-btn full-width w-button"  style="background-color:green-500 text-white ";/>
             </form>
             <a href="{% url 'social:begin' backend='google-oauth2' %}"
         class="outlined-btn full-width google-btn w-inline-block"><img
@@ -80,23 +82,23 @@
           alt="" class="google-btn-icon" />
         <div>Sign in with Google</div>
       </a>
-            <div class="success-message soft w-form-done">
-              <div>Hang tight! We&#x27;re signing you in...</div>
-            </div>
-            <div class="error-message soft w-form-fail">
-              <div>Oops! Your email or password is not correct.</div>
-            </div>
           </div>
           <div class="extra-form-actions-wrapper margin-top center no-margin-bottom">
             <div class="form-help-text">
-              Already have an account? <a href="/additional-utility-pages/sign-in" class="text-link">Sign in here</a>
+              Already have an account? <a href="/login/" class="text-link">Sign in here</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5f0763bf575ff70f2f96ccaa" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    
     <script src="https://assets.website-files.com/5f0763bf575ff70f2f96ccaa/js/webflow.ae514f89a.js" type="text/javascript"></script>
+   
+    <script>
+      $(document).ready(function() 
+{$(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });
+  </script>
     <!-- [if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   </body>
 </html>
