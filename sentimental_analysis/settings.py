@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-mj($mej^3alj&ojdbpq$te4yac1-**cb=8^wxld0r3&elp_d5o
 DEBUG = True
 #sentimentalanalysis-uhvm.onrender.com
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
